@@ -1,5 +1,6 @@
 import pygame, math, random
 
+# initialize pygame and load some values
 pygame.init()
 
 WINDOW_SIZE = (500, 500)
@@ -7,7 +8,9 @@ WINDOW_SIZE = (500, 500)
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Aim Trainer!")
 clock = pygame.time.Clock()
+font = pygame.font.Font(None, size=30)
 
+# setting up some values
 running = True
 
 x = 250
@@ -15,8 +18,6 @@ y = 250
 r = 20.0
 
 score = 0
-
-font = pygame.font.Font(None, size=30)
 
 target_click = False
 
@@ -31,6 +32,7 @@ def m_collision(c_x, c_y, m_x, m_y, radius):
     else:
         return False
 
+# main game loop
 while running:
 
     screen.fill((0, 0, 0))
@@ -38,6 +40,7 @@ while running:
     m_pos = pygame.mouse.get_pos()
     m_pressed = pygame.mouse.get_pressed()
 
+    # check whether the ball and the cursor touch, then do the effects
     if m_collision(x, y, m_pos[0], m_pos[1], r) and m_pressed[0] and not target_click:
         color = (255, 0, 0)
         target_click = True
@@ -60,6 +63,7 @@ while running:
 
     pygame.draw.circle(screen, color, (x, y), r)
 
+    # take user inputs
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
